@@ -1,0 +1,46 @@
+# .gitignore
+
+# -----------------------
+# Environment & Secrets
+# -----------------------
+.env
+.env.*
+!.env.example
+
+# -----------------------
+# uv & Virtual Environments
+# -----------------------
+.venv/
+venv/
+env/
+
+# -----------------------
+# Python Cache & Build
+# -----------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+build/
+dist/
+*.egg-info/
+
+# -----------------------
+# Testing & Coverage
+# -----------------------
+.pytest_cache/
+.coverage
+htmlcov/
+
+# -----------------------
+# MQTT Broker Data (Local)
+# -----------------------
+# We want to ignore the database and logs, but keep the config file.
+infrastructure/mosquitto/data/*
+infrastructure/mosquitto/log/*
+!infrastructure/mosquitto/data/.gitkeep
+!infrastructure/mosquitto/log/.gitkeep
+
+# Macos
+.DS_Store
+Thumbs.db

@@ -1,0 +1,19 @@
+[project]
+name = "iot-presense-network"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [{ name = "josias-r", email = "josias.ribi@gmail.com" }]
+requires-python = ">=3.14"
+dependencies = [
+    "dotenv>=0.9.9",
+    "paho-mqtt>=2.2.0",
+]
+
+[project.scripts]
+iot-presense-network = "iot_presense_network:main"
+main = "iot_presense_network.main:main"
+
+[build-system]
+requires = ["uv_build>=0.13.4,<0.14.0"]
+build-backend = "uv_build"
