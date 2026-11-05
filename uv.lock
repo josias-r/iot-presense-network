@@ -14,7 +14,7 @@ wheels = [
 ]
 
 [[package]]
-name = "iot-presense-network"
+name = "mesh-activity"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [

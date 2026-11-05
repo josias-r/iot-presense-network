@@ -1,7 +1,7 @@
 import time
 import json
 import paho.mqtt.client as mqtt
-from .config import MQTT_BROKER_HOST, MQTT_BROKER_PORT, MQTT_BASE_TOPIC
+from common.config import MQTT_BROKER_HOST, MQTT_BROKER_PORT, MQTT_BASE_TOPIC
 
 def on_connect(client, userdata, flags, reason_code, properties):
     if reason_code == 0:
