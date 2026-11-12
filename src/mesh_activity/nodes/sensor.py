@@ -6,9 +6,9 @@ import time
 import uuid
 from typing import Optional
 
-from common.config import Topics
-from common.models import GeoPoint, MotionEvent, SensorHeartbeat
-from common.mqtt_base import BaseMQTTNode
+from mesh_activity.common.config import Topics
+from mesh_activity.common.models import GeoPoint, MotionEvent, SensorHeartbeat
+from mesh_activity.common.mqtt_base import BaseMQTTNode
 
 logger = logging.getLogger(__name__)
 

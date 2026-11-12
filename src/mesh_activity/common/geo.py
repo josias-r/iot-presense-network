@@ -1,7 +1,7 @@
 """Geospatial calculations (distance, bearing, and projection)."""
 
 import math
-from common.models import GeoPoint
+from mesh_activity.common.models import GeoPoint
 
 EARTH_RADIUS_METERS = 6371000.0
 

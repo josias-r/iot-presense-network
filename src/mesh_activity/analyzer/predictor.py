@@ -4,9 +4,9 @@ from dataclasses import dataclass
 import logging
 from typing import Optional
 
-from common.geo import project_point
-from common.models import GeoPoint
-from analyzer.tracker import EntityTrack
+from mesh_activity.common.geo import project_point
+from mesh_activity.common.models import GeoPoint
+from mesh_activity.analyzer.tracker import EntityTrack
 
 logger = logging.getLogger(__name__)
 

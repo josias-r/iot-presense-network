@@ -5,7 +5,7 @@ import logging
 from typing import Any, Callable, Dict, Optional
 import paho.mqtt.client as mqtt
 
-from common.config import MQTT_BROKER_HOST, MQTT_BROKER_PORT, MQTT_KEEPALIVE_SEC
+from mesh_activity.common.config import MQTT_BROKER_HOST, MQTT_BROKER_PORT, MQTT_KEEPALIVE_SEC
 
 logger = logging.getLogger(__name__)
 

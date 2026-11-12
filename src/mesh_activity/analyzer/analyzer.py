@@ -5,12 +5,12 @@ import time
 import uuid
 from typing import Any, Dict
 
-from common.config import Topics
-from common.models import MotionEvent, SensorHeartbeat, SpatialHazardAlert
-from common.mqtt_base import BaseMQTTNode
-from analyzer.liveness import LivenessMonitor
-from analyzer.tracker import SpatioTemporalCorrelator
-from analyzer.predictor import TrajectoryPredictor
+from mesh_activity.common.config import Topics
+from mesh_activity.common.models import MotionEvent, SensorHeartbeat, SpatialHazardAlert
+from mesh_activity.common.mqtt_base import BaseMQTTNode
+from mesh_activity.analyzer.liveness import LivenessMonitor
+from mesh_activity.analyzer.tracker import SpatioTemporalCorrelator
+from mesh_activity.analyzer.predictor import TrajectoryPredictor
 
 logger = logging.getLogger(__name__)
 

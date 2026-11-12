@@ -3,10 +3,10 @@
 import logging
 import time
 
-from common.models import GeoPoint
-from nodes.sensor import SensorNode
-from nodes.warning_sign import WarningSignNode
-from analyzer.analyzer import AnalyzerNode
+from mesh_activity.common.models import GeoPoint
+from mesh_activity.nodes.sensor import SensorNode
+from mesh_activity.nodes.warning_sign import WarningSignNode
+from mesh_activity.analyzer.analyzer import AnalyzerNode
 
 logging.basicConfig(
     level=logging.INFO,

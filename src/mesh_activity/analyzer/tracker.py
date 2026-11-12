@@ -6,8 +6,8 @@ import time
 import uuid
 from typing import List, Optional
 
-from common.geo import calculate_bearing, haversine_distance
-from common.models import GeoPoint, MotionEvent
+from mesh_activity.common.geo import calculate_bearing, haversine_distance
+from mesh_activity.common.models import GeoPoint, MotionEvent
 
 logger = logging.getLogger(__name__)
 

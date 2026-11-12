@@ -1,2 +1,3 @@
-def main() -> None:
-    print("Hello from mesh-activity!")
+"""Mesh Activity: IoT Wildlife Tracking and Road Safety Warning System."""
+
+__version__ = "0.1.0"

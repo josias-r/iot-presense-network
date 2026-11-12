@@ -4,7 +4,7 @@ from dataclasses import dataclass
 import logging
 import time
 from typing import Dict, Optional
-from common.models import GeoPoint, SensorHeartbeat
+from mesh_activity.common.models import GeoPoint, SensorHeartbeat
 
 logger = logging.getLogger(__name__)
 
