@@ -6,7 +6,7 @@ import time
 from mesh_activity.common.models import GeoPoint
 from mesh_activity.nodes.sensor import SensorNode
 from mesh_activity.nodes.warning_sign import WarningSignNode
-from mesh_activity.analyzer.analyzer import AnalyzerNode
+
 
 logging.basicConfig(
     level=logging.INFO,
@@ -18,11 +18,7 @@ def run_demo_simulation() -> None:
     """Sets up a virtual forest, starts the analyzer, and simulates animal movement."""
     print("\n=== STARTING IOT WILDLIFE MESH SIMULATION ===\n")
 
-    # 1. Start Analyzer
-    analyzer = AnalyzerNode()
-    analyzer.connect()
-
-    # 2. Start Warning Signs along the roadway
+    # 1. Start Warning Signs along the roadway
     # Sign 1 is near the road crossing (lat=47.3780, lon=8.5430)
     sign_near = WarningSignNode(
         sign_id="sign_road_km12",
@@ -38,7 +34,7 @@ def run_demo_simulation() -> None:
     sign_near.connect()
     sign_far.connect()
 
-    # 3. Deploy Sensor Nodes along a forest path heading toward km12
+    # 2. Deploy Sensor Nodes along a forest path heading toward km12
     sensor1 = SensorNode(sensor_id="sensor_01", location=GeoPoint(latitude=47.3760, longitude=8.5410))
     sensor2 = SensorNode(sensor_id="sensor_02", location=GeoPoint(latitude=47.3768, longitude=8.5418))
     sensor3 = SensorNode(sensor_id="sensor_03", location=GeoPoint(latitude=47.3775, longitude=8.5425))
@@ -70,7 +66,6 @@ def run_demo_simulation() -> None:
         sensor3.stop()
         sign_near.stop()
         sign_far.stop()
-        analyzer.disconnect()
         print("Simulation ended cleanly.")
 
 

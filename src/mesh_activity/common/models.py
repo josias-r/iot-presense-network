@@ -8,7 +8,7 @@ from typing import Any, Dict, Optional
 
 @dataclass(frozen=True)
 class GeoPoint:
-    """Represents a geographic point in WGS84 coordinate system."""
+    """Rep  resents a geographic point in WGS84 coordinate system."""
     latitude: float
     longitude: float
     elevation_m: Optional[float] = None
@@ -16,7 +16,7 @@ class GeoPoint:
 
 @dataclass
 class SensorHeartbeat:
-    """Periodic health and telemetry payload emitted by sensor nodes."""
+    """Sensor health and telemetry payload for alive infos"""
     sensor_id: str
     location: GeoPoint
     battery_pct: float
@@ -35,10 +35,9 @@ class SensorHeartbeat:
             timestamp=data["timestamp"]
         )
 
-
 @dataclass
 class MotionEvent:
-    """Event-driven movement trigger published by a sensor node."""
+    """Event when sensors detect motion aka movement at their location"""
     event_id: str
     sensor_id: str
     location: GeoPoint
@@ -57,38 +56,4 @@ class MotionEvent:
             location=location,
             timestamp=data["timestamp"],
             confidence=data.get("confidence", 1.0)
-        )
-
-
-@dataclass
-class SpatialHazardAlert:
-    """Broadcast alert published by the Analyzer Node for autonomous sign activation."""
-    alert_id: str
-    track_id: str
-    timestamp: float
-    hazard_type: str
-    projected_crossing: GeoPoint
-    bearing_deg: float
-    speed_mps: float
-    time_to_crossing_sec: float
-    confidence: float
-    recommended_duration_sec: float = 30.0
-
-    def to_json(self) -> str:
-        return json.dumps(asdict(self))
-
-    @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> "SpatialHazardAlert":
-        projected = GeoPoint(**data["projected_crossing"])
-        return cls(
-            alert_id=data["alert_id"],
-            track_id=data["track_id"],
-            timestamp=data["timestamp"],
-            hazard_type=data["hazard_type"],
-            projected_crossing=projected,
-            bearing_deg=data["bearing_deg"],
-            speed_mps=data["speed_mps"],
-            time_to_crossing_sec=data["time_to_crossing_sec"],
-            confidence=data["confidence"],
-            recommended_duration_sec=data.get("recommended_duration_sec", 30.0)
         )

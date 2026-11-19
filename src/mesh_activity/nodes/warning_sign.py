@@ -1,13 +1,10 @@
 """Warning Sign Node: autonomous edge actuator filtering spatial alerts."""
 
 import logging
-import threading
 import time
-from typing import Any, Dict, Optional
+from typing import Any, Dict
 
-from mesh_activity.common.config import Topics
-from mesh_activity.common.geo import haversine_distance
-from mesh_activity.common.models import GeoPoint, SpatialHazardAlert
+from mesh_activity.common.models import GeoPoint
 from mesh_activity.common.mqtt_base import BaseMQTTNode
 
 logger = logging.getLogger(__name__)
@@ -22,69 +19,31 @@ class WarningSignNode(BaseMQTTNode):
         location: GeoPoint,
         warning_radius_meters: float = 250.0,
     ) -> None:
-        self.sign_id = sign_id
-        self.location = location
-        self.warning_radius_meters = warning_radius_meters
-
-        self.is_active = False
-        self._countdown_timer: Optional[threading.Timer] = None
-
-        super().__init__(
-            client_id=f"warning_sign_{sign_id}",
-            lwt_topic=Topics.warning_sign_status(sign_id),
-            lwt_payload={"state": "offline", "sign_id": sign_id},
-        )
+        raise NotImplementedError
 
     def on_connected(self) -> None:
         """Subscribes to global broadcast hazard alerts upon connection."""
-        self.subscribe(Topics.ALERTS_GLOBAL, qos=1)
-        logger.info(
-            f"WarningSign [{self.sign_id}] active at ({self.location.latitude}, {self.location.longitude}) "
-            f"with warning radius {self.warning_radius_meters}m"
-        )
+        raise NotImplementedError
 
     def on_message_received(self, topic: str, payload: Dict[str, Any]) -> None:
         """Processes incoming broadcast alerts and performs edge geofence evaluation."""
-        if topic == Topics.ALERTS_GLOBAL:
-            alert = SpatialHazardAlert.from_dict(payload)
-            self._evaluate_hazard(alert)
+        raise NotImplementedError
 
-    def _evaluate_hazard(self, alert: SpatialHazardAlert) -> None:
+    def _evaluate_hazard(self, alert: Any) -> None:
         """Checks if the projected crossing coordinate is within this sign's safety radius."""
-        dist = haversine_distance(self.location, alert.projected_crossing)
-
-        if dist <= self.warning_radius_meters:
-            logger.warning(
-                f"[{self.sign_id}] ALERT TRIGGERED! Hazard distance={dist:.1f}m <= {self.warning_radius_meters}m. "
-                f"Actuating lights for {alert.recommended_duration_sec}s"
-            )
-            self.activate_warning(duration_sec=alert.recommended_duration_sec)
-        else:
-            logger.debug(
-                f"[{self.sign_id}] Hazard outside safety zone (dist={dist:.1f}m > {self.warning_radius_meters}m). Ignoring."
-            )
+        raise NotImplementedError
 
     def activate_warning(self, duration_sec: float) -> None:
         """Engages physical/simulated warning indicators and starts a safety countdown."""
-        self.is_active = True
-
-        # Cancel any pending timeout to extend duration
-        if self._countdown_timer and self._countdown_timer.is_alive():
-            self._countdown_timer.cancel()
-
-        self._countdown_timer = threading.Timer(duration_sec, self.deactivate_warning)
-        self._countdown_timer.start()
+        raise NotImplementedError
 
     def deactivate_warning(self) -> None:
         """Turns off warning indicators."""
-        self.is_active = False
-        logger.info(f"[{self.sign_id}] Warning duration expired. Returning to IDLE.")
+        raise NotImplementedError
 
     def stop(self) -> None:
         """Cleans up timers and disconnects."""
-        if self._countdown_timer:
-            self._countdown_timer.cancel()
-        self.disconnect()
+        raise NotImplementedError
 
 
 def main() -> None:
